@@ -24,7 +24,7 @@ environment{
         stage('build'){
             tools{
                 maven 'Maven 3.3.9'
-                JDK 'jdk1.8.0'
+                jdk   'jdk1.8.0'
 
             step{
                 script{
