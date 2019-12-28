@@ -26,7 +26,7 @@ environment{
                 maven 'Maven 3.3.9'
                 jdk   'jdk1.8.0'
 
-            step{
+            steps{
                 script{
                     bat "mvn clean compile test"
                 }
