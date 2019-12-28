@@ -8,6 +8,7 @@ environment{
     branch = 'master'
     CID = '267219a0-9ba5-4f4d-a641-46d92b4b0bb5'
     giturl1 = 'https://github.com/nitishh35/simple-java-maven-app.git'
+    junitreportpath = 'target/surefire-reports'
 }    
 
     stages{
@@ -29,10 +30,18 @@ environment{
 
             steps {
                 script {
+                    milestone 1
                     bat "mvn clean compile test"
                 }
             }             
         }
+
+        stage('Unit testing'){  
+            steps{
+                milestone 2
+                junit "${junitreportpath}/**/*.xml"
+            }
+        }   
     }
 
 }
