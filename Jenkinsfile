@@ -24,12 +24,12 @@ environment{
                     checkout([$class: 'GitSCM', branches: [[name: "${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'Java-Maven']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${cid}", url: "${giturl1}"]]])
                 }
 
-            } 
-            }   
+            }    
         post {
             failure {
             echo "print failure"
             }
+        }
         }
         stage('build'){
             tools{
