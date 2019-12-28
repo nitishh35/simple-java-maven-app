@@ -4,6 +4,10 @@ pipeline {
 triggers{
     pollSCM('H/15 * * * *')
     }
+
+options {
+  buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '7', numToKeepStr: '10')
+}
 environment{
     branch = 'master'
     CID = '267219a0-9ba5-4f4d-a641-46d92b4b0bb5'
@@ -17,10 +21,14 @@ environment{
             
             steps{
                 script{
-                    checkout([$class: 'GitSCM', branches: [[name:"${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${cid}", url: "${giturl1}"]]])
+                    checkout([$class: 'GitSCM', branches: [[name: '"${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'Java-Maven']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${cid}", url: "${giturl1}"]]])
                 }
 
             }    
+        post {
+            failure {
+            echo "print failure"
+            }
         }
         stage('build'){
             tools{
@@ -45,3 +53,5 @@ environment{
     }
 
 }
+
+
